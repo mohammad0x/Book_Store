@@ -1,0 +1,161 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="persian">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>{{ book.bookName }}</title>
+<!-- Bootstrap core CSS -->
+
+<link href="{% static 'book_site/css/bootstrap.min.css' %}" rel="stylesheet">
+     <link rel="stylesheet" href="{% static 'book_site/css/comment.css' %}">
+<!-- Fonts -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+<!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'book_site/css/comment.css' %}">
+<link href="{% static 'book_site/css/mediumish.css' %}" rel="stylesheet">
+</head>
+<body>
+
+
+
+
+
+<div class="container">
+	<div class="row">
+
+{#		<!-- Begin Fixed Left Share -->#}
+
+{#		<!-- End Fixed Left Share -->#}
+
+		<!-- Begin Post -->
+		<div class="col-md-12 col-md-offset-2 col-xs-12 back">
+			<div class="mainheading">
+
+		
+				<h1 class="posttitle" > {{ book.bookName }}</h1>
+			</div>
+
+			<!-- Begin Featured Image -->
+			<img class="featured-image img-fluid" src="{{ book.photo.url }}" alt="">
+			<!-- End Featured Image -->
+
+			<!-- Begin Post Content -->
+			<div class="article-post" style="text-align:right;">
+				<p class="texts" style="padding-left:9rem">
+                    {{ book.description }}
+				</p>
+				
+				
+			</div>
+
+
+			<!-- Begin Tags -->
+			<div class="after-post-tags">
+				<ul class="tags" style="margin-right: 9rem;">
+                    {% for category in book.category.all %}
+					<li ><a href="{% url 'admin_post:Category' category.slug %}">{{ category.title }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+
+		</div>
+
+
+        	<div class="col-md-12 col-md-offset-2 col-xs-12">
+
+
+
+
+                <section style="margin-top: 1rem">
+                    <div class="containers">
+                        <div class="rows">
+
+                            <div  class="col-md-12 col-xs-12  ">
+                                <form method="POST" action="{% url 'admin_post:comments' book.id %}" id="algin-form">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <h4>نظرتان را وارد کنید</h4>
+
+                                        <textarea name="text" id="msg" cols="30" placeholder="پیام" rows="5" class="form-control" ></textarea>
+                                    </div>
+
+
+
+
+                                    <div class="form-group">
+                                        <button type="submit" id="post" class="btn">پیام</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-12 col-md-offset-2 col-xs-12 back comnt">
+
+                                <h1>نظرات</h1>
+                                {% for comments in comment %}
+                                <div class="darker mt-4 " style="width: 99%;">
+                                      <span>{{ comments.date }}</span>
+                                    <h4>{{ comments.user.username }}</h4>
+                                    <img src="{% static 'book_site/image/download (1).png' %}" alt="" class="rounded-circle" width="40" height="40">
+                                    <br>
+                                    <p>{{ comments.text }}</p>
+                                </div>
+                                {% endfor %}
+
+
+            </div>
+		</div>
+
+	</div>
+</div>
+<!-- End Articler
+================================================== -->
+
+<div class="hideshare"></div>
+
+
+
+<!-- Begin Twitter Timeline
+================================================== -->
+<div class="container margtop3rem">
+<a class="twitter-grid" href="https://twitter.com/TwitterDev/timelines/539487832448843776">WowThemesNet Tweets</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<!-- End Twitter Timeline
+================================================== -->
+
+
+<div class="container">
+	<div class="footer">
+		<p class="pull-left">
+			 Copyright &copy; 2017 Your Website Name
+		</p>
+		<p class="pull-right">
+			 Mediumish Theme by <a target="_blank" href="#">WowThemes.net</a>
+		</p>
+		<div class="clearfix">
+		</div>
+	</div>
+</div>
+<!-- End Footer
+================================================== -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+
+<script src="{% static 'book_site/js/js/jquery.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="{% static 'book_site/js/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'book_site/js/js/ie10-viewport-bug-workaround.js' %}"></script>
+<script src="{% static 'book_site/js/js/mediumish.js' %}"></script>
+</body>
+</html>
